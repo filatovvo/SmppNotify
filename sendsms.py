@@ -43,7 +43,7 @@ def main(argv):
 		print('-t <TEXT> is required')
 		sys.exit()
 	else:
-		logging.basicConfig(level='DEBUG')
+		#logging.basicConfig(level='DEBUG')
 
 		parts, encoding_flag, msg_type_flag = smpplib.gsm.make_parts(SMPPTEXT)
 		client = smpplib.client.Client(SMPPIP, SMPPPORT)
@@ -53,10 +53,13 @@ def main(argv):
     			lambda pdu: sys.stdout.write('sent {} {}\n'.format(pdu.sequence, pdu.message_id)))
 		client.set_message_received_handler(
     			lambda pdu: sys.stdout.write('delivered {}\n'.format(pdu.receipted_message_id)))
-
-		client.connect()
-		#client.bind_transmitter(system_id='alliance', password='Bank123asiA')
-		client.bind_transceiver(system_id='aab', password='123Bank')
+		try:
+			client.connect()
+			#client.bind_transmitter(system_id='alliance', password='Bank123asiA')
+			client.bind_transceiver(system_id='aab', password='123Bank')
+		except:
+			print('Check IPSec Connection')
+			sys.exit()
 		for part in parts:
    			pdu = client.send_message(
         			source_addr_ton=0,

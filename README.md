@@ -1,7 +1,7 @@
 python-libsmpp
 ==============
 
-SMPP library for Python. Forked from [google code](https://code.google.com/p/smpplib/).
+SMPP library for Python (). Forked from [github] (https://github.com/podshumok/python-smpplib).
 
 
 Example:
